@@ -1,8 +1,8 @@
 <template>
-  <div class="header-navigation-container">
-    <!-- Header Section -->
+  <div class="header-navigation-container" ref="headerRef">
+
     <header class="app-header">
-      <!-- Botón hamburguesa (visible en móvil) -->
+
       <button
         class="hamburger-header"
         @click="isMobileMenuOpen = !isMobileMenuOpen"
@@ -59,11 +59,10 @@
       </div>
     </header>
 
-    <!-- Navigation Menu Section -->
     <nav class="navigation-menu">
-      <!-- Contenedor de scroll para móvil -->
+
       <div class="mobile-menu-container" :class="{ open: isMobileMenuOpen }">
-        <!-- Menú principal -->
+
         <div :class="['main-menu', { open: isMobileMenuOpen }]" id="main-menu">
         <button 
           class="menu-item" 
@@ -79,7 +78,6 @@
           </svg>
         </button>
         
-        <!-- Categorías como hijos de Productos en móvil -->
         <div v-if="activeMenu === 'productos'" class="mobile-categories-list">
           <template v-for="category in productCategories" :key="category">
             <a 
@@ -98,9 +96,7 @@
               </svg>
             </a>
             
-            <!-- Subcategorías como hijos de cada categoría -->
             <div v-if="activeSubcategory === category" class="mobile-subcategories">
-              <!-- Subcategorías para Celulares -->
               <div v-if="category === 'Celulares'" class="mobile-subcategory-content">
                 <a 
                   v-for="brand in cellphoneBrands" 
@@ -112,7 +108,6 @@
                 </a>
               </div>
               
-              <!-- Subcategorías para Tablets -->
               <div v-if="category === 'Tablets'" class="mobile-subcategory-content">
                 <a 
                   v-for="brand in cellphoneBrands" 
@@ -124,7 +119,6 @@
                 </a>
               </div>
               
-              <!-- Subcategorías para Accesorios Móviles -->
               <div v-if="category === 'Accesorios Móviles'" class="mobile-subcategory-content">
                 <div v-for="accessoryGroup in mobileAccessories" :key="accessoryGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(accessoryGroup.category)">{{ accessoryGroup.category }}</h5>
@@ -139,7 +133,6 @@
                 </div>
               </div>
               
-              <!-- Subcategorías para Computadoras -->
               <div v-if="category === 'Computadoras'" class="mobile-subcategory-content">
                 <a 
                   v-for="brand in computerBrands" 
@@ -151,7 +144,6 @@
                 </a>
               </div>
               
-              <!-- Subcategorías para Accesorios para Computadoras -->
               <div v-if="category === 'Accesorios para Computadoras'" class="mobile-subcategory-content">
                 <div v-for="accessoryGroup in computerAccessories" :key="accessoryGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(accessoryGroup.category)">{{ accessoryGroup.category }}</h5>
@@ -166,7 +158,6 @@
                 </div>
               </div>
               
-              <!-- Subcategorías para TV y Video -->
               <div v-if="category === 'TV y Video'" class="mobile-subcategory-content">
                 <div v-for="tvGroup in tvVideoCategories" :key="tvGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(tvGroup.category)">{{ tvGroup.category }}</h5>
@@ -181,7 +172,6 @@
                 </div>
               </div>
               
-              <!-- Subcategorías para Audio -->
               <div v-if="category === 'Audio'" class="mobile-subcategory-content">
                 <div v-for="audioGroup in audioCategories" :key="audioGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(audioGroup.category)">{{ audioGroup.category }}</h5>
@@ -196,7 +186,6 @@
                 </div>
               </div>
               
-              <!-- Subcategorías para Electrodomésticos -->
               <div v-if="category === 'Electrodomésticos'" class="mobile-subcategory-content">
                 <div v-for="applianceGroup in appliancesCategories" :key="applianceGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(applianceGroup.category)">{{ applianceGroup.category }}</h5>
@@ -211,7 +200,6 @@
                 </div>
               </div>
               
-              <!-- Subcategorías para Hogar y Línea Blanca -->
               <div v-if="category === 'Hogar y Línea Blanca'" class="mobile-subcategory-content">
                 <div v-for="homeGroup in homeCategories" :key="homeGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(homeGroup.category)">{{ homeGroup.category }}</h5>
@@ -226,7 +214,6 @@
                 </div>
               </div>
               
-              <!-- Subcategorías para Muebles -->
               <div v-if="category === 'Muebles'" class="mobile-subcategory-content">
                 <div v-for="furnitureGroup in furnitureCategories" :key="furnitureGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(furnitureGroup.category)">{{ furnitureGroup.category }}</h5>
@@ -241,7 +228,6 @@
                 </div>
               </div>
               
-              <!-- Subcategorías para Camas y Colchones -->
               <div v-if="category === 'Camas y Colchones'" class="mobile-subcategory-content">
                 <div v-for="bedsGroup in bedsMattressesCategories" :key="bedsGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(bedsGroup.category)">{{ bedsGroup.category }}</h5>
@@ -256,7 +242,6 @@
                 </div>
               </div>
               
-              <!-- Subcategorías para Gamer Lab -->
               <div v-if="category === 'Gamer Lab'" class="mobile-subcategory-content">
                 <div v-for="gamerGroup in gamerLabCategories" :key="gamerGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(gamerGroup.category)">{{ gamerGroup.category }}</h5>
@@ -271,7 +256,6 @@
                 </div>
               </div>
               
-              <!-- Subcategorías para Gamer Lab -->
               <div v-if="category === 'Gamer Lab'" class="mobile-subcategory-content">
                 <div v-for="gamerGroup in gamerLabCategories" :key="gamerGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(gamerGroup.category)">{{ gamerGroup.category }}</h5>
@@ -286,7 +270,6 @@
                 </div>
               </div>
               
-              <!-- Subcategorías para Smart Home -->
               <div v-if="category === 'Smart Home'" class="mobile-subcategory-content">
                 <div v-for="smartHomeGroup in smartHomeCategories" :key="smartHomeGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(smartHomeGroup.category)">{{ smartHomeGroup.category }}</h5>
@@ -301,7 +284,6 @@
                 </div>
               </div>
               
-              <!-- Subcategorías para Deportes -->
               <div v-if="category === 'Deportes'" class="mobile-subcategory-content">
                 <div v-for="sportGroup in sportCategories" :key="sportGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(sportGroup.category)">{{ sportGroup.category }}</h5>
@@ -315,8 +297,7 @@
                   </a>
                 </div>
               </div>
-              
-              <!-- Subcategorías para Automotriz -->
+
               <div v-if="category === 'Automotriz'" class="mobile-subcategory-content">
                 <div v-for="automotiveGroup in automotiveCategories" :key="automotiveGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(automotiveGroup.category)">{{ automotiveGroup.category }}</h5>
@@ -331,7 +312,6 @@
                 </div>
               </div>
               
-              <!-- Subcategorías para Motos -->
               <div v-if="category === 'Motos'" class="mobile-subcategory-content">
                 <div v-for="motorcycleGroup in motorcycleCategories" :key="motorcycleGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(motorcycleGroup.category)">{{ motorcycleGroup.category }}</h5>
@@ -346,7 +326,6 @@
                 </div>
               </div>
               
-              <!-- Subcategorías para Herramientas -->
               <div v-if="category === 'Herramientas'" class="mobile-subcategory-content">
                 <div v-for="toolsGroup in toolsCategories" :key="toolsGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(toolsGroup.category)">{{ toolsGroup.category }}</h5>
@@ -361,7 +340,6 @@
                 </div>
               </div>
               
-              <!-- Subcategorías para Belleza -->
               <div v-if="category === 'Belleza'" class="mobile-subcategory-content">
                 <div v-for="beautyGroup in beautyCategories" :key="beautyGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(beautyGroup.category)">{{ beautyGroup.category }}</h5>
@@ -376,7 +354,6 @@
                 </div>
               </div>
               
-              <!-- Subcategorías para Bebés -->
               <div v-if="category === 'Bebés'" class="mobile-subcategory-content">
                 <div v-for="babyGroup in babyCategories" :key="babyGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(babyGroup.category)">{{ babyGroup.category }}</h5>
@@ -408,7 +385,6 @@
           </svg>
         </button>
         
-        <!-- Lista de marcas en móvil -->
         <div v-if="activeMenu === 'marcas'" class="mobile-categories-list">
           <a 
             href="#" 
@@ -425,7 +401,6 @@
             </svg>
           </a>
           
-          <!-- Subcategorías como hijos de Marcas -->
           <div v-if="activeSubcategory === 'Marcas'" class="mobile-subcategories">
             <div class="mobile-subcategory-content">
               <a 
@@ -446,6 +421,36 @@
         >
           Promociones
         </button>
+        
+        <div v-if="activeMenu === 'promociones'" class="mobile-categories-list">
+          <a 
+            href="#" 
+            class="mobile-category-item has-subcategory"
+            @click.prevent="selectCategory('Promociones')"
+            :class="{ 
+              'active': activeSubcategory === 'Promociones'
+            }"
+          >
+            Promociones
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="subcategory-arrow">
+              <polyline v-if="activeSubcategory === 'Promociones'" points="6,9 12,15 18,9"></polyline>
+              <polyline v-else points="9,18 15,12 9,6"></polyline>
+            </svg>
+          </a>
+          
+          <div v-if="activeSubcategory === 'Promociones'" class="mobile-subcategories">
+            <div class="mobile-subcategory-content">
+              <a 
+                v-for="promo in promotionsCategories" 
+                :key="promo"
+                href="#" 
+                class="mobile-subcategory-item"
+              >
+                {{ promo }}
+              </a>
+            </div>
+          </div>
+        </div>
         <button 
           class="menu-item"
           @click="toggleMenu('tarjetas')"
@@ -459,6 +464,36 @@
             <polyline points="9,18 15,12 9,6"></polyline>
           </svg>
         </button>
+        
+        <div v-if="activeMenu === 'tarjetas'" class="mobile-categories-list">
+          <a 
+            href="#" 
+            class="mobile-category-item has-subcategory"
+            @click.prevent="selectCategory('Tarjetas')"
+            :class="{ 
+              'active': activeSubcategory === 'Tarjetas'
+            }"
+          >
+            Tarjetas
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="subcategory-arrow">
+              <polyline v-if="activeSubcategory === 'Tarjetas'" points="6,9 12,15 18,9"></polyline>
+              <polyline v-else points="9,18 15,12 9,6"></polyline>
+            </svg>
+          </a>
+          
+          <div v-if="activeSubcategory === 'Tarjetas'" class="mobile-subcategories">
+            <div class="mobile-subcategory-content">
+              <a 
+                v-for="card in cardsCategories" 
+                :key="card"
+                href="#" 
+                class="mobile-subcategory-item"
+              >
+                {{ card }}
+              </a>
+            </div>
+          </div>
+        </div>
         <button 
           class="menu-item"
           @click="toggleMenu('blog')"
@@ -472,9 +507,38 @@
             <polyline points="9,18 15,12 9,6"></polyline>
           </svg>
         </button>
+        
+        <div v-if="activeMenu === 'blog'" class="mobile-categories-list">
+          <a 
+            href="#" 
+            class="mobile-category-item has-subcategory"
+            @click.prevent="selectCategory('Blog')"
+            :class="{ 
+              'active': activeSubcategory === 'Blog'
+            }"
+          >
+            Blog
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="subcategory-arrow">
+              <polyline v-if="activeSubcategory === 'Blog'" points="6,9 12,15 18,9"></polyline>
+              <polyline v-else points="9,18 15,12 9,6"></polyline>
+            </svg>
+          </a>
+          
+          <div v-if="activeSubcategory === 'Blog'" class="mobile-subcategories">
+            <div class="mobile-subcategory-content">
+              <a 
+                v-for="blogCategory in blogCategories" 
+                :key="blogCategory"
+                href="#" 
+                class="mobile-subcategory-item"
+              >
+                {{ blogCategory }}
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Submenú desplegable para Productos (Solo Desktop) -->
       <div v-if="activeMenu === 'productos'" class="submenu">
         <div class="submenu-content">
           <div class="categories-column">
@@ -497,11 +561,9 @@
           </div>
           <div class="content-area">
              <div v-if="!activeSubcategory" class="default-content">
-              <!-- Área para contenido adicional o imágenes -->
             </div>
           </div>
           
-          <!-- Subcategorías para Celulares -->
           <div v-if="activeSubcategory === 'Celulares'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Celulares')">CELULARES</h3>
             <div class="subcategory-grid">
@@ -515,7 +577,7 @@
               </a>
             </div>
           </div>
-          <!-- Subcategorías para Tablets -->
+
           <div v-if="activeSubcategory === 'Tablets'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Tablets')">TABLETS</h3>
             <div class="subcategory-grid">
@@ -529,7 +591,7 @@
               </a>
             </div>
           </div>
-          <!-- Subcategorías para Accesorios Móviles -->
+
           <div v-if="activeSubcategory === 'Accesorios Móviles'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Accesorios Móviles')">ACCESORIOS MÓVILES</h3>
             <div class="accessories-grid">
@@ -553,7 +615,6 @@
             </div>
           </div>
           
-          <!-- Subcategorías para Computadoras -->
           <div v-if="activeSubcategory === 'Computadoras'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Computadoras')">COMPUTADORAS</h3>
             <div class="subcategory-grid">
@@ -568,7 +629,6 @@
             </div>
           </div>
           
-          <!-- Subcategorías para Accesorios para Computadoras -->
           <div v-if="activeSubcategory === 'Accesorios para Computadoras'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Accesorios para Computadoras')">ACCESORIOS PARA COMPUTADORAS</h3>
             <div class="accessories-grid">
@@ -592,7 +652,6 @@
             </div>
           </div>
           
-          <!-- Subcategorías para TV y Video -->
           <div v-if="activeSubcategory === 'TV y Video'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('TV y Video')">TV Y VIDEO</h3>
             <div class="accessories-grid">
@@ -616,7 +675,6 @@
             </div>
           </div>
           
-          <!-- Subcategorías para Audio -->
           <div v-if="activeSubcategory === 'Audio'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Audio')">AUDIO</h3>
             <div class="accessories-grid">
@@ -640,7 +698,6 @@
             </div>
           </div>
           
-          <!-- Subcategorías para Electrodomésticos -->
           <div v-if="activeSubcategory === 'Electrodomésticos'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Electrodomésticos')">ELECTRODOMÉSTICOS</h3>
             <div class="accessories-grid">
@@ -664,7 +721,6 @@
             </div>
           </div>
           
-          <!-- Subcategorías para Hogar y Línea Blanca -->
           <div v-if="activeSubcategory === 'Hogar y Línea Blanca'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Hogar y Línea Blanca')">HOGAR Y LÍNEA BLANCA</h3>
             <div class="accessories-grid">
@@ -688,7 +744,6 @@
             </div>
           </div>
           
-          <!-- Subcategorías para Muebles -->
           <div v-if="activeSubcategory === 'Muebles'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Muebles')">MUEBLES</h3>
             <div class="accessories-grid">
@@ -712,7 +767,6 @@
             </div>
           </div>
           
-          <!-- Subcategorías para Camas y Colchones -->
           <div v-if="activeSubcategory === 'Camas y Colchones'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Camas y Colchones')">CAMAS Y COLCHONES</h3>
             <div class="accessories-grid">
@@ -736,7 +790,6 @@
             </div>
           </div>
           
-          <!-- Subcategorías para Gamer Lab -->
           <div v-if="activeSubcategory === 'Gamer Lab'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Gamer Lab')">GAMER LAB</h3>
             <div class="accessories-grid">
@@ -760,7 +813,6 @@
             </div>
           </div>
           
-          <!-- Subcategorías para Smart Home -->
           <div v-if="activeSubcategory === 'Smart Home'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Smart Home')">SMART HOME</h3>
             <div class="accessories-grid">
@@ -784,7 +836,6 @@
             </div>
           </div>
           
-          <!-- Subcategorías para Deportes -->
           <div v-if="activeSubcategory === 'Deportes'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Deportes')">DEPORTES</h3>
             <div class="accessories-grid">
@@ -808,7 +859,6 @@
             </div>
           </div>
           
-          <!-- Subcategorías para Automotriz -->
           <div v-if="activeSubcategory === 'Automotriz'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Automotriz')">AUTOMOTRIZ</h3>
             <div class="accessories-grid">
@@ -832,7 +882,6 @@
             </div>
           </div>
           
-          <!-- Subcategorías para Motos -->
           <div v-if="activeSubcategory === 'Motos'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Motos')">MOTOS</h3>
             <div class="accessories-grid">
@@ -856,7 +905,6 @@
             </div>
           </div>
           
-          <!-- Subcategorías para Herramientas -->
           <div v-if="activeSubcategory === 'Herramientas'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Herramientas')">HERRAMIENTAS</h3>
             <div class="accessories-grid">
@@ -880,7 +928,6 @@
             </div>
           </div>
           
-          <!-- Subcategorías para Belleza -->
           <div v-if="activeSubcategory === 'Belleza'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Belleza')">BELLEZA</h3>
             <div class="accessories-grid">
@@ -904,7 +951,6 @@
             </div>
           </div>
           
-          <!-- Subcategorías para Bebés -->
           <div v-if="activeSubcategory === 'Bebés'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Bebés')">BEBÉS</h3>
             <div class="accessories-grid">
@@ -931,7 +977,6 @@
         </div>
       </div>
       
-      <!-- Submenú desplegable para Marcas (Solo Desktop) -->
       <div v-if="activeMenu === 'marcas'" class="submenu">
         <div class="submenu-content">
           <div class="categories-column">
@@ -948,11 +993,10 @@
           </div>
           <div class="content-area">
             <div v-if="!activeSubcategory" class="default-content">
-              <!-- Área para contenido adicional o imágenes -->
+             
             </div>
           </div>
           
-          <!-- Subcategorías para Marcas -->
           <div v-if="activeSubcategory === 'Marcas'" class="subcategories-panel">
             <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Marcas')">MARCAS</h3>
             <div class="subcategory-grid">
@@ -969,10 +1013,126 @@
 
         </div>
       </div>
+
+      <div v-if="activeMenu === 'promociones'" class="submenu">
+        <div class="submenu-content">
+          <div class="categories-column">
+            <a 
+              href="#" 
+              class="category-item active"
+              @click.prevent="selectCategory('Promociones')"
+            >
+              PROMOCIONES
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="subcategory-arrow">
+                <polyline points="9,18 15,12 9,6"></polyline>
+              </svg>
+            </a>
+          </div>
+          <div class="content-area">
+            <div v-if="!activeSubcategory" class="default-content">
+ 
+            </div>
+          </div>
+          
+
+          <div v-if="activeSubcategory === 'Promociones'" class="subcategories-panel">
+            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Promociones')">PROMOCIONES</h3>
+            <div class="subcategory-grid">
+              <a 
+                v-for="promo in promotionsCategories" 
+                :key="promo"
+                href="#" 
+                class="subcategory-brand"
+              >
+                {{ promo }}
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      
+
+      <div v-if="activeMenu === 'tarjetas'" class="submenu">
+        <div class="submenu-content">
+          <div class="categories-column">
+            <a 
+              href="#" 
+              class="category-item active"
+              @click.prevent="selectCategory('Tarjetas')"
+            >
+              TARJETAS
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="subcategory-arrow">
+                <path d="m9 18 6-6-6-6"></path>
+              </svg>
+            </a>
+          </div>
+          <div class="content-area">
+            <div v-if="!activeSubcategory" class="default-content">
+              
+            </div>
+          </div>
+          
+          
+          <div v-if="activeSubcategory === 'Tarjetas'" class="subcategories-panel">
+            <h3 class="subcategory-title">TARJETAS</h3>
+            <div class="subcategory-grid">
+              <a 
+                v-for="card in cardsCategories" 
+                :key="card"
+                href="#" 
+                class="subcategory-brand"
+              >
+                {{ card }}
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      
+      
+      <div v-if="activeMenu === 'blog'" class="submenu">
+        <div class="submenu-content">
+          <div class="categories-column">
+            <a 
+              href="#" 
+              class="category-item active"
+              @click.prevent="selectCategory('Blog')"
+            >
+              BLOG
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="subcategory-arrow">
+                <polyline points="9,18 15,12 9,6"></polyline>
+              </svg>
+            </a>
+          </div>
+          <div class="content-area">
+            <div v-if="!activeSubcategory" class="default-content">
+             
+            </div>
+          </div>
+          
+          
+          <div v-if="activeSubcategory === 'Blog'" class="subcategories-panel">
+            <h3 class="subcategory-title">BLOG</h3>
+            <div class="subcategory-grid">
+              <a 
+                v-for="blogCategory in blogCategories" 
+                :key="blogCategory"
+                href="#" 
+                class="subcategory-brand"
+              >
+                {{ blogCategory }}
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
       </div>
     </nav>
 
-    <!-- Barra promocional MongePay -->
+
     <div class="promo-bar">
       <a href="https://www.mongepay.com/form-credito" target="_blank" class="promo-link">
         <span class="promo-text">
@@ -992,26 +1152,53 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const activeMenu = ref(null)
 const isMobileMenuOpen = ref(false)
 const activeSubcategory = ref(null)
+const headerRef = ref(null)
+
+const handleClickOutside = (event) => {
+  if (headerRef.value && !headerRef.value.contains(event.target)) {
+    activeMenu.value = null
+    activeSubcategory.value = null
+    isMobileMenuOpen.value = false
+  }
+}
+
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
 
 const toggleMenu = (menuName) => {
   activeMenu.value = activeMenu.value === menuName ? null : menuName
   if (activeMenu.value === 'productos') {
-    // Mantener la subcategoría activa si existe
+
   } else if (activeMenu.value === 'marcas') {
-    // Auto-seleccionar Marcas como subcategoría en desktop y móvil
+
     activeSubcategory.value = 'Marcas'
+  } else if (activeMenu.value === 'promociones') {
+
+    activeSubcategory.value = 'Promociones'
+  } else if (activeMenu.value === 'tarjetas') {
+
+    activeSubcategory.value = 'Tarjetas'
+  } else if (activeMenu.value === 'blog') {
+
+    activeSubcategory.value = 'Blog'
   } else {
     activeSubcategory.value = null
   }
 }
 
 const selectCategory = (category) => {
-  const categoriesWithSubmenu = ['Celulares', 'Tablets', 'Accesorios Móviles', 'Computadoras', 'Accesorios para Computadoras', 'TV y Video', 'Audio', 'Electrodomésticos', 'Hogar y Línea Blanca', 'Muebles', 'Camas y Colchones', 'Gamer Lab', 'Smart Home', 'Deportes', 'Automotriz', 'Motos', 'Herramientas', 'Belleza', 'Bebés', 'Marcas'];
+  const categoriesWithSubmenu = ['Celulares', 'Tablets', 'Accesorios Móviles', 'Computadoras', 'Accesorios para Computadoras', 'TV y Video', 'Audio', 'Electrodomésticos', 'Hogar y Línea Blanca', 'Muebles', 'Camas y Colchones', 'Gamer Lab', 'Smart Home', 'Deportes', 'Automotriz', 'Motos', 'Herramientas', 'Belleza', 'Bebés', 'Marcas', 'Promociones', 'Tarjetas', 'Blog'];
 
   if (categoriesWithSubmenu.includes(category)) {
     if (activeSubcategory.value === category) {
@@ -1025,8 +1212,6 @@ const selectCategory = (category) => {
 }
 
 const selectCategoryTitle = (categoryTitle) => {
-  // Por ahora solo mostramos en consola que la categoría fue seleccionada
-  // En el futuro aquí se puede agregar navegación a la página de productos
   console.log('Categoría seleccionada:', categoryTitle);
 }
 
@@ -1076,6 +1261,22 @@ const cardsCategories = [
   'Kit de Bienvenida',
   'Asistente Virtual',
   'Solicitar Tasa Cero'
+]
+
+const blogCategories = [
+  'Hogar y Línea Blanca',
+  'Tecnología',
+  'Salud y Ejercicio',
+  'Seguros',
+  'Entretenimiento',
+  'Fechas especiales'
+]
+
+const promotionsCategories = [
+  'Novedades',
+  'Exclusivo',
+  'Oferta del Día',
+  'Precios Black Friday'
 ]
 
 const cellphoneBrands = [

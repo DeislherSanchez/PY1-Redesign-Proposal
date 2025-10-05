@@ -1,29 +1,51 @@
-
 <script setup>
-import HeaderNavigation from '@/components/header_aux.vue';
+import HeaderNavigation from '@/components/header.vue';
+import Footer from '@/components/footer.vue';
+import Benefits from '@/components/benefits.vue';
 </script>
 
 <template>
-  <HeaderNavigation/>
   <div class="page-container">
-
+    <HeaderNavigation/>
     
-    <div class="content-wrapper">
+    <main class="content-wrapper">
 
-    </div>
+    </main>
+    <Benefits/>
+    <Footer/>
   </div>
 </template>
 
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  #app {
+    height: 100%;
+  }
+</style>
+
+
+
 <style scoped>
+
 .page-container {
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
 }
 
 .content-wrapper {
+  flex: 1; 
   margin-top: 155px; 
   padding: 20px;
-  min-height: calc(100vh - 155px);
+  box-sizing: border-box; 
 }
+
 
 h1 {
   color: #333;
@@ -39,4 +61,3 @@ p {
   line-height: 1.6;
 }
 </style>
-
