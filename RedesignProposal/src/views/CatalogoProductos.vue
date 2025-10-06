@@ -209,7 +209,13 @@ const clearFilters = () => {
 const goToPage = (page) => {
   if (page >= 1 && page <= totalPages.value) {
     currentPage.value = page;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Scroll al inicio del área de productos
+    setTimeout(() => {
+      const productsMain = document.querySelector('.products-main');
+      if (productsMain) {
+        productsMain.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }, 50);
   }
 };
 
@@ -495,8 +501,6 @@ onMounted(() => {
   </div>
 </template>
 
-
-
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
 
@@ -514,6 +518,8 @@ onMounted(() => {
   background-color: #f5f5f5;
   font-family: 'Open Sans', sans-serif;
   width: 100%;
+  height: calc(100vh - 155px);
+  overflow: hidden;
 }
 
 .breadcrumb {
@@ -603,6 +609,8 @@ onMounted(() => {
   gap: 30px;
   padding: 0;
   align-items: start;
+  height: calc(100vh - 235px);
+  overflow: hidden;
 }
 
 /* Sidebar de Filtros */
@@ -611,9 +619,7 @@ onMounted(() => {
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 180px;
-  max-height: calc(100vh - 200px);
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none; /* Firefox */
@@ -828,7 +834,18 @@ onMounted(() => {
   border-radius: 12px;
   padding: 30px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  min-height: 600px;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+/* Ocultar scrollbar en Chrome, Safari y Opera para products-main */
+.products-main::-webkit-scrollbar {
+  display: none;
 }
 
 .products-header {
@@ -890,6 +907,7 @@ onMounted(() => {
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 25px;
   margin-bottom: 40px;
+  flex: 1;
 }
 
 .product-card {
@@ -1152,6 +1170,7 @@ onMounted(() => {
   .content-wrapper {
     margin-top: 140px;
     padding: 15px;
+    height: calc(100vh - 140px);
   }
   
   .mobile-filters-container {
@@ -1160,6 +1179,7 @@ onMounted(() => {
   
   .catalog-container {
     grid-template-columns: 1fr;
+    height: calc(100vh - 220px);
   }
   
   .filters-sidebar {
@@ -1171,7 +1191,6 @@ onMounted(() => {
     height: 100vh;
     z-index: 9999;
     transition: left 0.3s ease;
-    max-height: none;
     overflow-y: auto;
   }
   
