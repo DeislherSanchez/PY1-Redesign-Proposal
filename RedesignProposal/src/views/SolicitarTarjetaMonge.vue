@@ -99,35 +99,35 @@ import Benefits from '@/components/benefits.vue';
 
         <div class="benefits-grid">
           <div class="benefit-card">
-            <svg viewBox="0 0 24 24" class="benefit-icon"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M10.5,6.5V11.5H13.5V13H9V11.5H10.5V8H7.5V6.5H10.5M16,13.25C16.69,13.25 17.25,12.69 17.25,12C17.25,11.31 16.69,10.75 16,10.75C15.31,10.75 14.75,11.31 14.75,12C14.75,12.69 15.31,13.25 16,13.25M16,9.25C16.69,9.25 17.25,8.69 17.25,8C17.25,7.31 16.69,6.75 16,6.75C15.31,6.75 14.75,7.31 14.75,8C14.75,8.69 15.31,9.25 16,9.25Z"/></svg>
+            <img src="/icons/porcentaje.svg" alt="Icono de beneficio" class="benefit-icon">
             <p>Pasá tus compras hasta 24 meses sin interés</p>
           </div>
           <div class="benefit-card">
-            <svg viewBox="0 0 24 24" class="benefit-icon"><path d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19C3,20.1 3.9,21 5,21H19C20.1,21 21,20.1 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z"/></svg>
+            <img src="/icons/pagos.svg" alt="Icono de pago en dias" class="benefit-icon">
             <p>Hasta 45 días para pagar<br><small>*En relación directa a la fecha de corte y pago</small></p>
           </div>
           <div class="benefit-card">
-            <svg viewBox="0 0 24 24" class="benefit-icon"><path d="M20,4H4C2.89,4 2,4.89 2,6V18C2,19.11 2.89,20 4,20H20C21.11,20 22,19.11 22,18V6C22,4.89 21.11,4 20,4M20,6V8H4V6H20M4,18V12H20V18H4Z"/></svg>
+            <img src="/icons/cardMonge.svg" alt="Icono de tarjeta monge" class="benefit-icon">
             <p>Pagá tu Tarjeta Monge por medio de Monge pay o Tienda Monge</p>
           </div>
           <div class="benefit-card">
-            <svg viewBox="0 0 24 24" class="benefit-icon"><path d="M17,18C17,18.55 16.55,19 16,19C15.45,19 15,18.55 15,18C15,17.45 15.45,17 16,17C16.55,17 17,17.45 17,18M1,2V4H3L6.6,11.59L5.24,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42C7.29,15 7.17,14.89 7.17,14.75L7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.58 17.3,11.97L20.88,5.5C20.95,5.34 21,5.17 21,5A1,1 0 0,0 20,4H5.21L4.27,2H1M7,18C7,18.55 6.55,19 6,19C5.45,19 5,18.55 5,18C5,17.45 5.45,17 6,17C6.55,17 7,17.45 7,18Z"/></svg>
+            <img src="/icons/comprar.svg" alt="Icono de comprar" class="benefit-icon">
             <p>Comprá a tasa 0% en tiendamonge.com</p>
           </div>
           <div class="benefit-card">
-            <svg viewBox="0 0 24 24" class="benefit-icon"><path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,5.09L18,8.09V11C18,14.36 15.54,17.5 12,18.82C8.46,17.5 6,14.36 6,11V8.09L12,5.09M10.95,15.5L16.5,9.94L15.08,8.53L10.95,12.67L8.88,10.6L7.46,12L10.95,15.5Z"/></svg>
+            <img src="/icons/respaldo.svg" alt="Icono de respaldo" class="benefit-icon">
             <p>Un seguro que sí te protege y te da beneficios inmediatos</p>
           </div>
           <div class="benefit-card">
-            <svg viewBox="0 0 24 24" class="benefit-icon"><path d="M12,20C16.4,20 20,16.4 20,12C20,7.6 16.4,4 12,4C7.6,4 4,7.6 4,12C4,16.4 7.6,20 12,20M12,2C17.5,2 22,6.5 22,12C22,17.5 17.5,22 12,22C6.5,22 2,17.5 2,12C2,6.5 6.5,2 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"/></svg>
+            <img src="/icons/atencion247.svg" alt="Icono de atención 24/7" class="benefit-icon">
             <p>Atención<br>L a V 7:00 a 7:00<br>S y D 8:00 a 4:00</p>
           </div>
           <div class="benefit-card">
-            <svg viewBox="0 0 24 24" class="benefit-icon"><path d="M18,15H6V13H18M18,11H6V9H18M21.2,2H2.8A2,2 0 0,0 1,4V20A2,2 0 0,0 2.8,22H21.2A2,2 0 0,0 23,20V4A2,2 0 0,0 21.2,2Z"/></svg>
+            <img src="/icons/mastercard.svg" alt="Icono de tarjeta internacional" class="benefit-icon">
             <p>Tarjeta internacional</p>
           </div>
           <div class="benefit-card">
-            <svg viewBox="0 0 24 24" class="benefit-icon"><path d="M12,1C4.82,1 2,4.82 2,9C2,12.02 3.67,14.67 6,16.44V19.5C6,19.78 6.22,20 6.5,20H9.5C9.78,20 10,19.78 10,19.5V16.5H14V19.5C14,19.78 14.22,20 14.5,20H17.5C17.78,20 18,19.78 18,19.5V16.44C20.33,14.67 22,12.02 22,9C22,4.82 19.18,1 12,1M11,11H8V8H11V11M16,11H13V8H16V11Z"/></svg>
+            <img src="/icons/asistente.svg" alt="Icono de asistente virtual" class="benefit-icon">
             <p>Asistente Virtual</p>
           </div>
         </div>
@@ -153,19 +153,19 @@ import Benefits from '@/components/benefits.vue';
         </div>
         <div class="icons-showcase">
           <div class="icon-circle">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="showcase-svg"><path d="M17 18c-1.11 0-2 .89-2 2s.89 2 2 2 2-.89 2-2-.89-2-2-2M1 2h3.27l.94 2H20c.55 0 1 .45 1 1 0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.94 2H19v2H7c-1.11 0-2-.89-2-2 0-.35.09-.68.24-.96l1.36-2.45-3.2-6.43-.18-.35c-.08-.16-.12-.33-.12-.5 0-.55.45-1 1-1Z"/></svg>
+            <img src="/icons/compras.svg" alt="Icono de compras" class="showcase-svg">
           </div>
           <div class="icon-circle">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="showcase-svg"><path d="M18.32 10.5h-1.64V6.75c0-.41-.34-.75-.75-.75h-2.18c-.41 0-.75.34-.75.75V10.5h-1.64V4.75c0-.41-.34-.75-.75-.75h-2.18c-.41 0-.75.34-.75.75V10.5H5.75c-.41 0-.75.34-.75.75v5c0 .41.34.75.75.75h4.17v2.25h-1.17c-.41 0-.75.34-.75.75s.34.75.75.75h4.67c.41 0 .75-.34.75-.75s-.34-.75-.75-.75h-1.17V17h4.08c.41 0 .75-.34.75-.75v-5c0-.41-.34-.75-.75-.75Z"/></svg>
+            <img src="/icons/gasolina.svg" alt="Icono de gasolina" class="showcase-svg">
           </div>
           <div class="icon-circle">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="showcase-svg"><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.01 0c5.07.5 9 4.79 9 10s-3.93 9.5-9 10V2z"/></svg>
+            <img src="/icons/restaurante.svg" alt="Icono de restaurantes" class="showcase-svg">
           </div>
           <div class="icon-circle">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="showcase-svg"><path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"/></svg>
+            <img src="/icons/salud.svg" alt="Icono de salud" class="showcase-svg">
           </div>
           <div class="icon-circle">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="showcase-svg"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+            <img src="/icons/avion.svg" alt="Icono de avión" class="showcase-svg">
           </div>
         </div>
         <div class="final-promo-text">
@@ -461,7 +461,7 @@ import Benefits from '@/components/benefits.vue';
 .icon-circle {
   width: 90px;
   height: 90px;
-  border: 2px solid #00a651;
+  border: 2px solid #28b935;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -471,7 +471,7 @@ import Benefits from '@/components/benefits.vue';
 .showcase-svg {
   width: 45px;
   height: 45px;
-  fill: #00a651;
+  fill: #28b935;
 }
 
 .final-promo-text {
