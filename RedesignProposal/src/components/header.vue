@@ -721,7 +721,6 @@
                 href="#" 
                 class="category-item"
                 @click.prevent="category === 'Todos los Productos' ? navigateToCatalog('', null) : (!hasSubmenu(category) ? navigateToCatalog(category, null) : selectCategory(category, $event))"
-                @mouseenter="showSubmenuOnHover(category)"
                 :class="{ 
                   'has-subcategory': category !== 'Todos los Productos' && hasSubmenu(category),
                   'active': activeSubcategory === category
@@ -1431,18 +1430,15 @@ onUnmounted(() => {
 const toggleMenu = (menuName) => {
   activeMenu.value = activeMenu.value === menuName ? null : menuName
   if (activeMenu.value === 'productos') {
-
+    // No establecer automáticamente ninguna subcategoría para productos
+    activeSubcategory.value = null
   } else if (activeMenu.value === 'marcas') {
-
     activeSubcategory.value = 'Marcas'
   } else if (activeMenu.value === 'promociones') {
-
     activeSubcategory.value = 'Promociones'
   } else if (activeMenu.value === 'tarjetas') {
-
     activeSubcategory.value = 'Tarjetas'
   } else if (activeMenu.value === 'blog') {
-
     activeSubcategory.value = 'Blog'
   } else {
     activeSubcategory.value = null
@@ -1477,12 +1473,6 @@ const selectCategory = (category, event) => {
     }
   } else {
     activeSubcategory.value = null;
-  }
-}
-
-const showSubmenuOnHover = (category) => {
-  if (hasSubmenu(category)) {
-    activeSubcategory.value = category;
   }
 }
 
