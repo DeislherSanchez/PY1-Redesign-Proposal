@@ -170,7 +170,7 @@ onMounted(() => {
 
 .categories-container {
   width: 100%;
-  padding: 60px 20px;
+  padding: 40px 20px;
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -178,7 +178,7 @@ onMounted(() => {
 
 .categories-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .categories-title {
@@ -196,9 +196,8 @@ onMounted(() => {
 
 .carousel-container {
   position: relative;
-  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 60px;
+  padding: 0 30px;
 }
 
 .carousel-btn {
