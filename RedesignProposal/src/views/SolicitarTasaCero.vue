@@ -62,7 +62,7 @@ const redirectToSolicitar = () => {
               <input type="tel" id="numero-contacto" name="numero-contacto" required>
             </div>
             
-            <div class="form-group">
+            <div class="form-group center-button">
               <button type="submit" class="submit-btn">ENVIAR</button>
             </div>
           </form>
@@ -184,6 +184,10 @@ const redirectToSolicitar = () => {
   margin-bottom: 25px;
 }
 
+.form-group.center-button {
+  text-align: center;
+}
+
 .form-group label {
   display: block;
   font-family: 'Open Sans', sans-serif;
@@ -227,7 +231,7 @@ const redirectToSolicitar = () => {
   border-radius: 4px;
   transition: background-color 0.3s;
   font-family: 'Open Sans', sans-serif;
-  width: 100%;
+  display: inline-block;
 }
 
 .submit-btn:hover {
