@@ -16,7 +16,7 @@
 
       <div class="logo-section">
         <router-link to="/" class="logo-link">
-          <h1><img src="/logo.png" alt="Logo" class="logo" /></h1>
+          <h1><img src="/logoMonge.png" alt="Logo" class="logo" /></h1>
         </router-link>
       </div>
 
