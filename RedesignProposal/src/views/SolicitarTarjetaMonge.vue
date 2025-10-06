@@ -77,7 +77,7 @@ import Benefits from '@/components/benefits.vue';
               <label for="terminos">Términos y Condiciones <span class="required">*</span></label>
             </div>
             
-            <div class="form-group">
+            <div class="form-group center-button">
               <button type="submit" class="submit-btn">ENVIAR</button>
             </div>
           </form>
@@ -232,6 +232,10 @@ import Benefits from '@/components/benefits.vue';
 
 .form-group {
   margin-bottom: 25px;
+}
+
+.form-group.center-button {
+  text-align: center;
 }
 
 .form-group label {
