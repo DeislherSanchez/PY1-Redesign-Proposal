@@ -7,7 +7,7 @@
 
       <div class="benefit-item">
         <div class="icon-wrapper">
-          <img src="https://cdn-icons-png.flaticon.com/512/3004/3004458.png" alt="icon" />
+          <img src="/icons/atencion.svg" alt="icon" />
         </div>
         <div class="benefit-text">
           <p>Atención personalizada vía WA</p>
@@ -17,7 +17,7 @@
 
       <div class="benefit-item">
         <div class="icon-wrapper">
-          <img src="https://cdn-icons-png.flaticon.com/512/61/61457.png" alt="icon" />
+          <img src="/icons/seguro.svg" alt="icon" />
         </div>
         <div class="benefit-text">
           <p>Comprá fácil y 100% seguro 24/7</p>
@@ -26,7 +26,7 @@
 
       <div class="benefit-item">
         <div class="icon-wrapper">
-          <img src="https://cdn-icons-png.flaticon.com/512/2331/2331966.png" alt="icon" />
+          <img src="/icons/pago.svg" alt="icon" />
         </div>
         <div class="benefit-text">
           <p>Pagá con tu crédito, Tarjeta de crédito o débito, Tasa Cero Tarjeta Monge, Tasa Cero BAC.</p>
@@ -35,7 +35,7 @@
 
       <div class="benefit-item">
         <div class="icon-wrapper">
-          <img src="https://cdn-icons-png.flaticon.com/512/2618/2618245.png" alt="icon" />
+          <img src="/icons/cambio.svg" alt="icon" />
         </div>
         <div class="benefit-text">
           <p>Cambios y devoluciones fáciles en todas las Monge del país</p>
@@ -44,7 +44,7 @@
 
       <div class="benefit-item">
         <div class="icon-wrapper">
-          <img src="https://cdn-icons-png.flaticon.com/512/1161/1161388.png" alt="icon" />
+          <img src="/icons/proteger.svg" alt="icon" />
         </div>
         <div class="benefit-text">
           <p>Protegé tus compras con Super Respaldo Monge</p>
@@ -53,7 +53,7 @@
 
       <div class="benefit-item">
         <div class="icon-wrapper">
-          <img src="https://cdn-icons-png.flaticon.com/512/3514/3514491.png" alt="icon" />
+          <img src="/icons/precios.svg" alt="icon" />
         </div>
         <div class="benefit-text">
           <p>Precios, promociones y cupones</p>
