@@ -1,4 +1,5 @@
 <script setup>
+// --- Tu script se mantiene igual ---
 import { ref, onMounted } from 'vue';
 
 // Estado para el drag scroll
@@ -352,7 +353,7 @@ const calcularDescuento = (precio, precioDescuento) => {
 }
 
 .carousel-section {
-  margin-bottom: 60px;
+  margin-bottom: 60px; /* Espacio para la versión de escritorio */
 }
 
 .section-header {
@@ -594,6 +595,11 @@ const calcularDescuento = (precio, precioDescuento) => {
   .section-header { flex-direction: column; gap: 15px; align-items: flex-start; }
   .product-card { min-width: 220px; max-width: 220px; }
   .product-image { height: 200px; }
+  
+  /* --- SOLUCIÓN AÑADIDA --- */
+  .carousel-section {
+    margin-bottom: 30px; /* Reduce el espacio entre carruseles en móviles */
+  }
 }
 
 @media (max-width: 480px) {

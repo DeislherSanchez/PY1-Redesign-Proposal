@@ -495,18 +495,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style>
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-}
 
-#app {
-  height: 100%;
-}
-</style>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');

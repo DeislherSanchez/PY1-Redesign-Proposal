@@ -198,6 +198,8 @@ onMounted(() => {
   position: relative;
   margin: 0 auto;
   padding: 0 30px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .carousel-btn {
@@ -356,7 +358,7 @@ onMounted(() => {
 
 @media (max-width: 480px) {
   .categories-container {
-    padding: 40px 5px;
+    padding: 60px 5px 40px 5px;
   }
 
   .carousel-btn {

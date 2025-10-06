@@ -1,28 +1,44 @@
-<script setup>
-import { RouterView } from 'vue-router';
-
-</script>
-
 <template>
-  <RouterView/>
+  <div id="app" class="site-container">
+    <main class="main-content">
+      <router-view />
+    </main>
+  </div>
 </template>
 
 <style>
-/* Prevenir scroll horizontal en toda la aplicación */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* Estilos globales para prevenir scroll horizontal */
 html, body {
   margin: 0;
   padding: 0;
+  width: 100%;
   overflow-x: hidden;
-  max-width: 100%;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
 #app {
+  width: 100%;
   overflow-x: hidden;
-  max-width: 100vw;
 }
 
-* {
-  box-sizing: border-box;
+.site-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+  overflow-x: hidden;
 }
 </style>
-
