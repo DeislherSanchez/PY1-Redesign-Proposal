@@ -31,10 +31,10 @@ import Categories from '@/components/categories.vue';
 
 .content-wrapper {
   flex: 1; 
-  margin-top: 155px; /* Margen para la versión de escritorio grande */
+  margin-top: 120px; 
   padding: 0;
   box-sizing: border-box; 
-  transition: margin-top 0.2s ease-in-out; /* Opcional: añade una transición suave */
+  transition: margin-top 0.2s ease-in-out; 
 }
 
 h1 {
@@ -51,19 +51,20 @@ p {
   line-height: 1.6;
 }
 
-/* --- SOLUCIÓN AÑADIDA --- */
-/* Media query para escritorios más pequeños y tablets en horizontal */
 @media (max-width: 1100px) {
   .content-wrapper {
-    /* Ajusta este valor para que coincida con la altura del header en esta resolución */
-    margin-top: 135px; 
+    margin-top: 110px; 
   }
 }
 
-/* Media query para tablets en vertical y móviles */
+@media (max-width: 920px) {
+  .content-wrapper {
+    margin-top: 85px; 
+  }
+}
+
 @media (max-width: 768px) {
   .content-wrapper {
-    /* Ajusta este valor para la altura del header en móviles */
     margin-top: 80px; 
   }
 }

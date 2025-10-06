@@ -1390,22 +1390,43 @@ const isMobileMenuOpen = ref(false)
 const activeSubcategory = ref(null)
 const headerRef = ref(null)
 
+let resizeObserver;
+
 const handleClickOutside = (event) => {
   if (headerRef.value && !headerRef.value.contains(event.target)) {
-    activeMenu.value = null
-    activeSubcategory.value = null
-    isMobileMenuOpen.value = false
+    activeMenu.value = null;
+    activeSubcategory.value = null;
+    isMobileMenuOpen.value = false;
   }
-}
-
+};
 
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
-})
+  document.addEventListener('click', handleClickOutside);
+
+  // Lógica para medir la altura del header
+  if (headerRef.value) {
+    const updateHeaderHeight = () => {
+      const height = headerRef.value.offsetHeight;
+      document.documentElement.style.setProperty('--header-height', `${height}px`);
+    };
+
+    // Usamos ResizeObserver para detectar cambios de tamaño de forma eficiente
+    resizeObserver = new ResizeObserver(updateHeaderHeight);
+    resizeObserver.observe(headerRef.value);
+    
+    // Llamamos a la función una vez al inicio
+    updateHeaderHeight();
+  }
+});
 
 onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
-})
+  document.removeEventListener('click', handleClickOutside);
+
+  // Limpiamos el observer cuando el componente se destruye
+  if (resizeObserver && headerRef.value) {
+    resizeObserver.unobserve(headerRef.value);
+  }
+});
 
 const toggleMenu = (menuName) => {
   activeMenu.value = activeMenu.value === menuName ? null : menuName
