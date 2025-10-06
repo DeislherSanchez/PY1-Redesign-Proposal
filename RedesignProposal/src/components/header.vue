@@ -2832,7 +2832,7 @@ form.search-container {
     flex-direction: column; 
     align-items: stretch;
     max-height: 70vh;
-    overflow-y: auto;
+    /* overflow-y: auto;  <-- CAMBIO: Removido */
     
     scrollbar-width: none; 
     -ms-overflow-style: none; 
@@ -2853,6 +2853,7 @@ form.search-container {
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.25);
     text-align: left;
+    flex-shrink: 0; /* <-- CAMBIO: Añadido */
   }
   
   .menu-item:last-child { 
@@ -2865,10 +2866,20 @@ form.search-container {
   
   .mobile-categories-list {
     display: block;
+    overflow-y: auto; /* <-- CAMBIO: Añadido */
+    flex: 1; /* <-- CAMBIO: Añadido */
+    min-height: 0; /* <-- CAMBIO: Añadido */
+    scrollbar-width: none; /* <-- CAMBIO: Añadido */
+    -ms-overflow-style: none; /* <-- CAMBIO: Añadido */
+  }
+
+  .mobile-categories-list::-webkit-scrollbar {
+    display: none; /* <-- CAMBIO: Añadido */
   }
   
   .mobile-category-item {
     padding-left: 30px;
+    background-color: #fff; /* Fondo para que no se vea transparente al hacer scroll */
   }
   
   
