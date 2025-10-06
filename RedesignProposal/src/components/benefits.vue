@@ -24,7 +24,6 @@
         </div>
       </div>
 
-
       <div class="benefit-item">
         <div class="icon-wrapper">
           <img src="https://cdn-icons-png.flaticon.com/512/2331/2331966.png" alt="icon" />
@@ -33,7 +32,6 @@
           <p>Pagá con tu crédito, Tarjeta de crédito o débito, Tasa Cero Tarjeta Monge, Tasa Cero BAC.</p>
         </div>
       </div>
-
 
       <div class="benefit-item">
         <div class="icon-wrapper">
@@ -44,7 +42,6 @@
         </div>
       </div>
 
-
       <div class="benefit-item">
         <div class="icon-wrapper">
           <img src="https://cdn-icons-png.flaticon.com/512/1161/1161388.png" alt="icon" />
@@ -53,7 +50,6 @@
           <p>Protegé tus compras con Super Respaldo Monge</p>
         </div>
       </div>
-
 
       <div class="benefit-item">
         <div class="icon-wrapper">
@@ -87,7 +83,8 @@
 }
 
 .title-divider {
-  width: 900px;
+  max-width: 900px;
+  width: 100%;
   height: 4px;
   background-color: #28b935;
   border: none;
@@ -116,10 +113,15 @@
   filter: brightness(0) saturate(100%) invert(53%) sepia(99%) saturate(446%) hue-rotate(82deg) brightness(96%) contrast(93%);
 }
 
+.benefit-text {
+  flex: 1; 
+}
+
 .benefit-text p {
   margin: 0;
   font-size: 16px;
   line-height: 1.4;
+  word-wrap: break-word; 
 }
 
 .sub-text {
@@ -134,11 +136,34 @@
 }
 
 @media (max-width: 768px) {
+  .benefits-container {
+    padding: 30px 15px;
+  }
+  
   .benefits-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
+  
   .benefits-title {
-    font-size: 24px;
+    font-size: 22px;
+    text-align: left;
+    margin-bottom: 15px;
+  }
+  
+  .title-divider {
+    margin: 0 0 30px 0;
+  }
+  
+  .benefit-text p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .icon-wrapper img {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
   }
 }
 </style>

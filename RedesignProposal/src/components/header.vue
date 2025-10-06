@@ -41,13 +41,13 @@
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
         </button>
-        <button class="user-button" aria-label="Menú de usuario">
+        <router-link to="/Login" class="user-button" aria-label="Menú de usuario">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
           <span class="profile-name">Mi Cuenta</span>
-        </button>
+        </router-link>
         <button class="cart-button" aria-label="Carrito de compras">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="9" cy="21" r="1"></circle>
@@ -83,14 +83,14 @@
             <a 
               href="#" 
               class="mobile-category-item"
-              @click.prevent="selectCategory(category)"
+              @click.prevent="category === 'Todos los Productos' ? navigateToCatalog('', null) : (category !== 'Celulares' && category !== 'Tablets' && category !== 'Accesorios Móviles' && category !== 'Computadoras' && category !== 'Accesorios para Computadoras' && category !== 'TV y Video' && category !== 'Audio' && category !== 'Electrodomésticos' && category !== 'Hogar y Línea Blanca' && category !== 'Muebles' && category !== 'Camas y Colchones' && category !== 'Gamer Lab' && category !== 'Smart Home' && category !== 'Deportes' && category !== 'Automotriz' && category !== 'Motos' && category !== 'Herramientas' && category !== 'Belleza' && category !== 'Bebés' ? navigateToCatalog(category, null) : selectCategory(category))"
               :class="{ 
-                'has-subcategory': category === 'Celulares' || category === 'Tablets' || category === 'Accesorios Móviles' || category === 'Computadoras' || category === 'Accesorios para Computadoras' || category === 'TV y Video' || category === 'Audio' || category === 'Electrodomésticos' || category === 'Hogar y Línea Blanca' || category === 'Muebles' || category === 'Camas y Colchones' || category === 'Gamer Lab' || category === 'Smart Home' || category === 'Deportes' || category === 'Automotriz' || category === 'Motos' || category === 'Herramientas' || category === 'Belleza' || category === 'Bebés',
+                'has-subcategory': category !== 'Todos los Productos' && (category === 'Celulares' || category === 'Tablets' || category === 'Accesorios Móviles' || category === 'Computadoras' || category === 'Accesorios para Computadoras' || category === 'TV y Video' || category === 'Audio' || category === 'Electrodomésticos' || category === 'Hogar y Línea Blanca' || category === 'Muebles' || category === 'Camas y Colchones' || category === 'Gamer Lab' || category === 'Smart Home' || category === 'Deportes' || category === 'Automotriz' || category === 'Motos' || category === 'Herramientas' || category === 'Belleza' || category === 'Bebés'),
                 'active': activeSubcategory === category
               }"
             >
               {{ category }}
-              <svg v-if="category === 'Celulares' || category === 'Tablets' || category === 'Accesorios Móviles' || category === 'Computadoras' || category === 'Accesorios para Computadoras' || category === 'TV y Video' || category === 'Audio' || category === 'Electrodomésticos' || category === 'Hogar y Línea Blanca' || category === 'Muebles' || category === 'Camas y Colchones' || category === 'Gamer Lab' || category === 'Smart Home' || category === 'Deportes' || category === 'Automotriz' || category === 'Motos' || category === 'Herramientas' || category === 'Belleza' || category === 'Bebés'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="subcategory-arrow">
+              <svg v-if="category !== 'Todos los Productos' && (category === 'Celulares' || category === 'Tablets' || category === 'Accesorios Móviles' || category === 'Computadoras' || category === 'Accesorios para Computadoras' || category === 'TV y Video' || category === 'Audio' || category === 'Electrodomésticos' || category === 'Hogar y Línea Blanca' || category === 'Muebles' || category === 'Camas y Colchones' || category === 'Gamer Lab' || category === 'Smart Home' || category === 'Deportes' || category === 'Automotriz' || category === 'Motos' || category === 'Herramientas' || category === 'Belleza' || category === 'Bebés')" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="subcategory-arrow">
                 <polyline v-if="activeSubcategory === category" points="6,9 12,15 18,9"></polyline>
                 <polyline v-else points="9,18 15,12 9,6"></polyline>
               </svg>
@@ -99,10 +99,18 @@
             <div v-if="activeSubcategory === category" class="mobile-subcategories">
               <div v-if="category === 'Celulares'" class="mobile-subcategory-content">
                 <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Celulares')"
+                >
+                  Ver Todos los Celulares
+                </a>
+                <a 
                   v-for="brand in cellphoneBrands" 
                   :key="brand"
                   href="#" 
                   class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Celulares', brand)"
                 >
                   {{ brand }}
                 </a>
@@ -110,16 +118,31 @@
               
               <div v-if="category === 'Tablets'" class="mobile-subcategory-content">
                 <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Tablets')"
+                >
+                  Ver Todas las Tablets
+                </a>
+                <a 
                   v-for="brand in cellphoneBrands" 
                   :key="brand"
                   href="#" 
                   class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Tablets', brand)"
                 >
                   {{ brand }}
                 </a>
               </div>
               
               <div v-if="category === 'Accesorios Móviles'" class="mobile-subcategory-content">
+                <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Accesorios Móviles')"
+                >
+                  Ver Todos los Accesorios Móviles
+                </a>
                 <div v-for="accessoryGroup in mobileAccessories" :key="accessoryGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(accessoryGroup.category)">{{ accessoryGroup.category }}</h5>
                   <a 
@@ -135,16 +158,31 @@
               
               <div v-if="category === 'Computadoras'" class="mobile-subcategory-content">
                 <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Computadoras')"
+                >
+                  Ver Todas las Computadoras
+                </a>
+                <a 
                   v-for="brand in computerBrands" 
                   :key="brand"
                   href="#" 
                   class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Computadoras', brand)"
                 >
                   {{ brand }}
                 </a>
               </div>
               
               <div v-if="category === 'Accesorios para Computadoras'" class="mobile-subcategory-content">
+                <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Accesorios para Computadoras')"
+                >
+                  Ver Todos los Accesorios para Computadoras
+                </a>
                 <div v-for="accessoryGroup in computerAccessories" :key="accessoryGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(accessoryGroup.category)">{{ accessoryGroup.category }}</h5>
                   <a 
@@ -159,6 +197,13 @@
               </div>
               
               <div v-if="category === 'TV y Video'" class="mobile-subcategory-content">
+                <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('TV y Video')"
+                >
+                  Ver Todo TV y Video
+                </a>
                 <div v-for="tvGroup in tvVideoCategories" :key="tvGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(tvGroup.category)">{{ tvGroup.category }}</h5>
                   <a 
@@ -173,6 +218,13 @@
               </div>
               
               <div v-if="category === 'Audio'" class="mobile-subcategory-content">
+                <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Audio')"
+                >
+                  Ver Todo Audio
+                </a>
                 <div v-for="audioGroup in audioCategories" :key="audioGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(audioGroup.category)">{{ audioGroup.category }}</h5>
                   <a 
@@ -187,6 +239,13 @@
               </div>
               
               <div v-if="category === 'Electrodomésticos'" class="mobile-subcategory-content">
+                <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Electrodomésticos')"
+                >
+                  Ver Todos los Electrodomésticos
+                </a>
                 <div v-for="applianceGroup in appliancesCategories" :key="applianceGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(applianceGroup.category)">{{ applianceGroup.category }}</h5>
                   <a 
@@ -201,6 +260,13 @@
               </div>
               
               <div v-if="category === 'Hogar y Línea Blanca'" class="mobile-subcategory-content">
+                <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Hogar y Línea Blanca')"
+                >
+                  Ver Todo Hogar y Línea Blanca
+                </a>
                 <div v-for="homeGroup in homeCategories" :key="homeGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(homeGroup.category)">{{ homeGroup.category }}</h5>
                   <a 
@@ -215,6 +281,13 @@
               </div>
               
               <div v-if="category === 'Muebles'" class="mobile-subcategory-content">
+                <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Muebles')"
+                >
+                  Ver Todos los Muebles
+                </a>
                 <div v-for="furnitureGroup in furnitureCategories" :key="furnitureGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(furnitureGroup.category)">{{ furnitureGroup.category }}</h5>
                   <a 
@@ -229,6 +302,13 @@
               </div>
               
               <div v-if="category === 'Camas y Colchones'" class="mobile-subcategory-content">
+                <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Camas y Colchones')"
+                >
+                  Ver Todas las Camas y Colchones
+                </a>
                 <div v-for="bedsGroup in bedsMattressesCategories" :key="bedsGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(bedsGroup.category)">{{ bedsGroup.category }}</h5>
                   <a 
@@ -243,20 +323,13 @@
               </div>
               
               <div v-if="category === 'Gamer Lab'" class="mobile-subcategory-content">
-                <div v-for="gamerGroup in gamerLabCategories" :key="gamerGroup.category" class="mobile-accessory-group">
-                  <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(gamerGroup.category)">{{ gamerGroup.category }}</h5>
-                  <a 
-                    v-for="item in gamerGroup.items" 
-                    :key="item"
-                    href="#" 
-                    class="mobile-subcategory-item"
-                  >
-                    {{ item }}
-                  </a>
-                </div>
-              </div>
-              
-              <div v-if="category === 'Gamer Lab'" class="mobile-subcategory-content">
+                <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Gamer Lab')"
+                >
+                  Ver Todo Gamer Lab
+                </a>
                 <div v-for="gamerGroup in gamerLabCategories" :key="gamerGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(gamerGroup.category)">{{ gamerGroup.category }}</h5>
                   <a 
@@ -271,6 +344,13 @@
               </div>
               
               <div v-if="category === 'Smart Home'" class="mobile-subcategory-content">
+                <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Smart Home')"
+                >
+                  Ver Todo Smart Home
+                </a>
                 <div v-for="smartHomeGroup in smartHomeCategories" :key="smartHomeGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(smartHomeGroup.category)">{{ smartHomeGroup.category }}</h5>
                   <a 
@@ -285,6 +365,13 @@
               </div>
               
               <div v-if="category === 'Deportes'" class="mobile-subcategory-content">
+                <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Deportes')"
+                >
+                  Ver Todo Deportes
+                </a>
                 <div v-for="sportGroup in sportCategories" :key="sportGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(sportGroup.category)">{{ sportGroup.category }}</h5>
                   <a 
@@ -299,6 +386,13 @@
               </div>
 
               <div v-if="category === 'Automotriz'" class="mobile-subcategory-content">
+                <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Automotriz')"
+                >
+                  Ver Todo Automotriz
+                </a>
                 <div v-for="automotiveGroup in automotiveCategories" :key="automotiveGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(automotiveGroup.category)">{{ automotiveGroup.category }}</h5>
                   <a 
@@ -313,6 +407,13 @@
               </div>
               
               <div v-if="category === 'Motos'" class="mobile-subcategory-content">
+                <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Motos')"
+                >
+                  Ver Todas las Motos
+                </a>
                 <div v-for="motorcycleGroup in motorcycleCategories" :key="motorcycleGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(motorcycleGroup.category)">{{ motorcycleGroup.category }}</h5>
                   <a 
@@ -327,6 +428,13 @@
               </div>
               
               <div v-if="category === 'Herramientas'" class="mobile-subcategory-content">
+                <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Herramientas')"
+                >
+                  Ver Todas las Herramientas
+                </a>
                 <div v-for="toolsGroup in toolsCategories" :key="toolsGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(toolsGroup.category)">{{ toolsGroup.category }}</h5>
                   <a 
@@ -341,6 +449,13 @@
               </div>
               
               <div v-if="category === 'Belleza'" class="mobile-subcategory-content">
+                <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Belleza')"
+                >
+                  Ver Todo Belleza
+                </a>
                 <div v-for="beautyGroup in beautyCategories" :key="beautyGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(beautyGroup.category)">{{ beautyGroup.category }}</h5>
                   <a 
@@ -355,6 +470,13 @@
               </div>
               
               <div v-if="category === 'Bebés'" class="mobile-subcategory-content">
+                <a 
+                  href="#" 
+                  class="mobile-subcategory-item"
+                  @click.prevent="navigateToCatalog('Bebés')"
+                >
+                  Ver Todo Bebés
+                </a>
                 <div v-for="babyGroup in babyCategories" :key="babyGroup.category" class="mobile-accessory-group">
                   <h5 class="mobile-accessory-group-title clickeable-category" @click="selectCategoryTitle(babyGroup.category)">{{ babyGroup.category }}</h5>
                   <a 
@@ -483,14 +605,32 @@
           
           <div v-if="activeSubcategory === 'Tarjetas'" class="mobile-subcategories">
             <div class="mobile-subcategory-content">
-              <a 
-                v-for="card in cardsCategories" 
-                :key="card"
-                href="#" 
+              <router-link 
+                to="/SolicitarTarjetaMonge" 
                 class="mobile-subcategory-item"
               >
-                {{ card }}
+                Solicitar Tu Tarjeta Monge
+              </router-link>
+              <a 
+                href="https://www.tiendamonge.com/tarjeta-monge/kit-de-bienvenida"
+                target="_blank"
+                class="mobile-subcategory-item"
+              >
+                Kit de Bienvenida
               </a>
+              <a 
+                href="https://www.asistentefinancieramonge.com/Mensaje/TARJETA.MONGE"
+                target="_blank"
+                class="mobile-subcategory-item"
+              >
+                Asistente Virtual
+              </a>
+              <router-link 
+                to="/SolicitarTasaCero" 
+                class="mobile-subcategory-item"
+              >
+                Solicitar Tasa Cero
+              </router-link>
             </div>
           </div>
         </div>
@@ -527,12 +667,46 @@
           <div v-if="activeSubcategory === 'Blog'" class="mobile-subcategories">
             <div class="mobile-subcategory-content">
               <a 
-                v-for="blogCategory in blogCategories" 
-                :key="blogCategory"
-                href="#" 
+                href="https://www.tiendamonge.com/blog-monge/hogar-y-linea-blanca.html"
+                target="_blank"
                 class="mobile-subcategory-item"
               >
-                {{ blogCategory }}
+                Hogar y Línea Blanca
+              </a>
+              <a 
+                href="https://www.tiendamonge.com/blog-monge/tecnologia.html"
+                target="_blank"
+                class="mobile-subcategory-item"
+              >
+                Tecnología
+              </a>
+              <a 
+                href="https://www.tiendamonge.com/blog-monge/salud-y-ejercicio.html"
+                target="_blank"
+                class="mobile-subcategory-item"
+              >
+                Salud y Ejercicio
+              </a>
+              <a 
+                href="https://www.tiendamonge.com/blog-monge/seguros.html"
+                target="_blank"
+                class="mobile-subcategory-item"
+              >
+                Seguros
+              </a>
+              <a 
+                href="https://www.tiendamonge.com/blog-monge/entretenimiento.html"
+                target="_blank"
+                class="mobile-subcategory-item"
+              >
+                Entretenimiento
+              </a>
+              <a 
+                href="https://www.tiendamonge.com/blog-monge/fechas-especiales.html"
+                target="_blank"
+                class="mobile-subcategory-item"
+              >
+                Fechas especiales
               </a>
             </div>
           </div>
@@ -546,14 +720,14 @@
               <a 
                 href="#" 
                 class="category-item"
-                @click.prevent="selectCategory(category)"
+                @click.prevent="category === 'Todos los Productos' ? navigateToCatalog('', null) : (category !== 'Celulares' && category !== 'Tablets' && category !== 'Accesorios Móviles' && category !== 'Computadoras' && category !== 'Accesorios para Computadoras' && category !== 'TV y Video' && category !== 'Audio' && category !== 'Electrodomésticos' && category !== 'Hogar y Línea Blanca' && category !== 'Muebles' && category !== 'Camas y Colchones' && category !== 'Gamer Lab' && category !== 'Smart Home' && category !== 'Deportes' && category !== 'Automotriz' && category !== 'Motos' && category !== 'Herramientas' && category !== 'Belleza' && category !== 'Bebés' ? navigateToCatalog(category, null) : selectCategory(category))"
                 :class="{ 
-                  'has-subcategory': category === 'Celulares' || category === 'Tablets' || category === 'Accesorios Móviles' || category === 'Computadoras' || category === 'Accesorios para Computadoras' || category === 'TV y Video' || category === 'Audio' || category === 'Electrodomésticos' || category === 'Hogar y Línea Blanca' || category === 'Muebles' || category === 'Camas y Colchones' || category === 'Gamer Lab' || category === 'Smart Home' || category === 'Deportes' || category === 'Automotriz' || category === 'Motos' || category === 'Herramientas' || category === 'Belleza' || category === 'Bebés',
+                  'has-subcategory': category !== 'Todos los Productos' && (category === 'Celulares' || category === 'Tablets' || category === 'Accesorios Móviles' || category === 'Computadoras' || category === 'Accesorios para Computadoras' || category === 'TV y Video' || category === 'Audio' || category === 'Electrodomésticos' || category === 'Hogar y Línea Blanca' || category === 'Muebles' || category === 'Camas y Colchones' || category === 'Gamer Lab' || category === 'Smart Home' || category === 'Deportes' || category === 'Automotriz' || category === 'Motos' || category === 'Herramientas' || category === 'Belleza' || category === 'Bebés'),
                   'active': activeSubcategory === category
                 }"
               >
                 {{ category }}
-                <svg v-if="category === 'Celulares' || category === 'Tablets' || category === 'Accesorios Móviles' || category === 'Computadoras' || category === 'Accesorios para Computadoras' || category === 'TV y Video' || category === 'Audio' || category === 'Electrodomésticos' || category === 'Hogar y Línea Blanca' || category === 'Muebles' || category === 'Camas y Colchones' || category === 'Gamer Lab' || category === 'Smart Home' || category === 'Deportes' || category === 'Automotriz' || category === 'Motos' || category === 'Herramientas' || category === 'Belleza' || category === 'Bebés'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="subcategory-arrow">
+                <svg v-if="category !== 'Todos los Productos' && (category === 'Celulares' || category === 'Tablets' || category === 'Accesorios Móviles' || category === 'Computadoras' || category === 'Accesorios para Computadoras' || category === 'TV y Video' || category === 'Audio' || category === 'Electrodomésticos' || category === 'Hogar y Línea Blanca' || category === 'Muebles' || category === 'Camas y Colchones' || category === 'Gamer Lab' || category === 'Smart Home' || category === 'Deportes' || category === 'Automotriz' || category === 'Motos' || category === 'Herramientas' || category === 'Belleza' || category === 'Bebés')" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="subcategory-arrow">
                   <polyline points="9,18 15,12 9,6"></polyline>
                 </svg>
               </a>
@@ -565,13 +739,14 @@
           </div>
           
           <div v-if="activeSubcategory === 'Celulares'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Celulares')">CELULARES</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Celulares')">CELULARES</h3>
             <div class="subcategory-grid">
               <a 
                 v-for="brand in cellphoneBrands" 
                 :key="brand"
                 href="#" 
                 class="subcategory-brand"
+                @click.prevent="navigateToCatalog('Celulares', brand)"
               >
                 {{ brand }}
               </a>
@@ -579,13 +754,14 @@
           </div>
 
           <div v-if="activeSubcategory === 'Tablets'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Tablets')">TABLETS</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Tablets')">TABLETS</h3>
             <div class="subcategory-grid">
               <a 
                 v-for="brand in cellphoneBrands" 
                 :key="brand"
                 href="#" 
                 class="subcategory-brand"
+                @click.prevent="navigateToCatalog('Tablets', brand)"
               >
                 {{ brand }}
               </a>
@@ -593,7 +769,7 @@
           </div>
 
           <div v-if="activeSubcategory === 'Accesorios Móviles'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Accesorios Móviles')">ACCESORIOS MÓVILES</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Accesorios Móviles')">ACCESORIOS MÓVILES</h3>
             <div class="accessories-grid">
               <div 
                 v-for="accessoryGroup in mobileAccessories" 
@@ -616,13 +792,14 @@
           </div>
           
           <div v-if="activeSubcategory === 'Computadoras'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Computadoras')">COMPUTADORAS</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Computadoras')">COMPUTADORAS</h3>
             <div class="subcategory-grid">
               <a 
                 v-for="brand in computerBrands" 
                 :key="brand"
                 href="#" 
                 class="subcategory-brand"
+                @click.prevent="navigateToCatalog('Computadoras', brand)"
               >
                 {{ brand }}
               </a>
@@ -630,7 +807,7 @@
           </div>
           
           <div v-if="activeSubcategory === 'Accesorios para Computadoras'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Accesorios para Computadoras')">ACCESORIOS PARA COMPUTADORAS</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Accesorios para Computadoras')">ACCESORIOS PARA COMPUTADORAS</h3>
             <div class="accessories-grid">
               <div 
                 v-for="accessoryGroup in computerAccessories" 
@@ -653,7 +830,7 @@
           </div>
           
           <div v-if="activeSubcategory === 'TV y Video'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('TV y Video')">TV Y VIDEO</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('TV y Video')">TV Y VIDEO</h3>
             <div class="accessories-grid">
               <div 
                 v-for="tvGroup in tvVideoCategories" 
@@ -676,7 +853,7 @@
           </div>
           
           <div v-if="activeSubcategory === 'Audio'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Audio')">AUDIO</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Audio')">AUDIO</h3>
             <div class="accessories-grid">
               <div 
                 v-for="audioGroup in audioCategories" 
@@ -699,7 +876,7 @@
           </div>
           
           <div v-if="activeSubcategory === 'Electrodomésticos'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Electrodomésticos')">ELECTRODOMÉSTICOS</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Electrodomésticos')">ELECTRODOMÉSTICOS</h3>
             <div class="accessories-grid">
               <div 
                 v-for="applianceGroup in appliancesCategories" 
@@ -722,7 +899,7 @@
           </div>
           
           <div v-if="activeSubcategory === 'Hogar y Línea Blanca'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Hogar y Línea Blanca')">HOGAR Y LÍNEA BLANCA</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Hogar y Línea Blanca')">HOGAR Y LÍNEA BLANCA</h3>
             <div class="accessories-grid">
               <div 
                 v-for="homeGroup in homeCategories" 
@@ -745,7 +922,7 @@
           </div>
           
           <div v-if="activeSubcategory === 'Muebles'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Muebles')">MUEBLES</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Muebles')">MUEBLES</h3>
             <div class="accessories-grid">
               <div 
                 v-for="furnitureGroup in furnitureCategories" 
@@ -768,7 +945,7 @@
           </div>
           
           <div v-if="activeSubcategory === 'Camas y Colchones'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Camas y Colchones')">CAMAS Y COLCHONES</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Camas y Colchones')">CAMAS Y COLCHONES</h3>
             <div class="accessories-grid">
               <div 
                 v-for="bedsGroup in bedsMattressesCategories" 
@@ -791,7 +968,7 @@
           </div>
           
           <div v-if="activeSubcategory === 'Gamer Lab'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Gamer Lab')">GAMER LAB</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Gamer Lab')">GAMER LAB</h3>
             <div class="accessories-grid">
               <div 
                 v-for="gamerGroup in gamerLabCategories" 
@@ -814,7 +991,7 @@
           </div>
           
           <div v-if="activeSubcategory === 'Smart Home'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Smart Home')">SMART HOME</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Smart Home')">SMART HOME</h3>
             <div class="accessories-grid">
               <div 
                 v-for="smartHomeGroup in smartHomeCategories" 
@@ -837,7 +1014,7 @@
           </div>
           
           <div v-if="activeSubcategory === 'Deportes'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Deportes')">DEPORTES</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Deportes')">DEPORTES</h3>
             <div class="accessories-grid">
               <div 
                 v-for="sportGroup in sportCategories" 
@@ -860,7 +1037,7 @@
           </div>
           
           <div v-if="activeSubcategory === 'Automotriz'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Automotriz')">AUTOMOTRIZ</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Automotriz')">AUTOMOTRIZ</h3>
             <div class="accessories-grid">
               <div 
                 v-for="automotiveGroup in automotiveCategories" 
@@ -883,7 +1060,7 @@
           </div>
           
           <div v-if="activeSubcategory === 'Motos'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Motos')">MOTOS</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Motos')">MOTOS</h3>
             <div class="accessories-grid">
               <div 
                 v-for="motorcycleGroup in motorcycleCategories" 
@@ -906,7 +1083,7 @@
           </div>
           
           <div v-if="activeSubcategory === 'Herramientas'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Herramientas')">HERRAMIENTAS</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Herramientas')">HERRAMIENTAS</h3>
             <div class="accessories-grid">
               <div 
                 v-for="toolsGroup in toolsCategories" 
@@ -929,7 +1106,7 @@
           </div>
           
           <div v-if="activeSubcategory === 'Belleza'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Belleza')">BELLEZA</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Belleza')">BELLEZA</h3>
             <div class="accessories-grid">
               <div 
                 v-for="beautyGroup in beautyCategories" 
@@ -952,7 +1129,7 @@
           </div>
           
           <div v-if="activeSubcategory === 'Bebés'" class="subcategories-panel">
-            <h3 class="subcategory-title clickeable-main-title" @click="selectCategoryTitle('Bebés')">BEBÉS</h3>
+            <h3 class="subcategory-title clickeable-main-title" @click="navigateToCatalog('Bebés')">BEBÉS</h3>
             <div class="accessories-grid">
               <div 
                 v-for="babyGroup in babyCategories" 
@@ -1005,6 +1182,7 @@
                 :key="brand"
                 href="#" 
                 class="subcategory-brand"
+                @click.prevent="navigateToBrand(brand)"
               >
                 {{ brand }}
               </a>
@@ -1077,14 +1255,32 @@
           <div v-if="activeSubcategory === 'Tarjetas'" class="subcategories-panel">
             <h3 class="subcategory-title">TARJETAS</h3>
             <div class="subcategory-grid">
-              <a 
-                v-for="card in cardsCategories" 
-                :key="card"
-                href="#" 
+              <router-link 
+                to="/SolicitarTarjetaMonge" 
                 class="subcategory-brand"
               >
-                {{ card }}
+                Solicitar Tu Tarjeta Monge
+              </router-link>
+              <a 
+                href="https://www.tiendamonge.com/tarjeta-monge/kit-de-bienvenida"
+                target="_blank"
+                class="subcategory-brand"
+              >
+                Kit de Bienvenida
               </a>
+              <a 
+                href="https://www.asistentefinancieramonge.com/Mensaje/TARJETA.MONGE"
+                target="_blank"
+                class="subcategory-brand"
+              >
+                Asistente Virtual
+              </a>
+              <router-link 
+                to="/SolicitarTasaCero" 
+                class="subcategory-brand"
+              >
+                Solicitar Tasa Cero
+              </router-link>
             </div>
           </div>
 
@@ -1117,12 +1313,46 @@
             <h3 class="subcategory-title">BLOG</h3>
             <div class="subcategory-grid">
               <a 
-                v-for="blogCategory in blogCategories" 
-                :key="blogCategory"
-                href="#" 
+                href="https://www.tiendamonge.com/blog-monge/hogar-y-linea-blanca.html"
+                target="_blank"
                 class="subcategory-brand"
               >
-                {{ blogCategory }}
+                Hogar y Línea Blanca
+              </a>
+              <a 
+                href="https://www.tiendamonge.com/blog-monge/tecnologia.html"
+                target="_blank"
+                class="subcategory-brand"
+              >
+                Tecnología
+              </a>
+              <a 
+                href="https://www.tiendamonge.com/blog-monge/salud-y-ejercicio.html"
+                target="_blank"
+                class="subcategory-brand"
+              >
+                Salud y Ejercicio
+              </a>
+              <a 
+                href="https://www.tiendamonge.com/blog-monge/seguros.html"
+                target="_blank"
+                class="subcategory-brand"
+              >
+                Seguros
+              </a>
+              <a 
+                href="https://www.tiendamonge.com/blog-monge/entretenimiento.html"
+                target="_blank"
+                class="subcategory-brand"
+              >
+                Entretenimiento
+              </a>
+              <a 
+                href="https://www.tiendamonge.com/blog-monge/fechas-especiales.html"
+                target="_blank"
+                class="subcategory-brand"
+              >
+                Fechas especiales
               </a>
             </div>
           </div>
@@ -1200,6 +1430,12 @@ const toggleMenu = (menuName) => {
 const selectCategory = (category) => {
   const categoriesWithSubmenu = ['Celulares', 'Tablets', 'Accesorios Móviles', 'Computadoras', 'Accesorios para Computadoras', 'TV y Video', 'Audio', 'Electrodomésticos', 'Hogar y Línea Blanca', 'Muebles', 'Camas y Colchones', 'Gamer Lab', 'Smart Home', 'Deportes', 'Automotriz', 'Motos', 'Herramientas', 'Belleza', 'Bebés', 'Marcas', 'Promociones', 'Tarjetas', 'Blog'];
 
+  // Si es "Todos los Productos", navegar directamente al catálogo sin filtros
+  if (category === 'Todos los Productos') {
+    navigateToCatalog('', null);
+    return;
+  }
+
   if (categoriesWithSubmenu.includes(category)) {
     if (activeSubcategory.value === category) {
       activeSubcategory.value = null; 
@@ -1215,7 +1451,36 @@ const selectCategoryTitle = (categoryTitle) => {
   console.log('Categoría seleccionada:', categoryTitle);
 }
 
+// Navegación a catálogo con parámetros
+const navigateToCatalog = (categoria, marca = null) => {
+  // Cerrar menús
+  activeMenu.value = null;
+  activeSubcategory.value = null;
+  isMobileMenuOpen.value = false;
+  
+  // Si no hay categoría, ir al catálogo sin filtros
+  if (!categoria) {
+    window.location.href = `/CatalogoProductos`;
+    return;
+  }
+  
+  const params = new URLSearchParams({ categoria });
+  if (marca) {
+    params.append('marca', marca);
+  }
+  // Navegar
+  window.location.href = `/CatalogoProductos?${params.toString()}`;
+}
+
+const navigateToBrand = (marca) => {
+  activeMenu.value = null;
+  activeSubcategory.value = null;
+  isMobileMenuOpen.value = false;
+  window.location.href = `/CatalogoProductos?marca=${encodeURIComponent(marca)}`;
+}
+
 const productCategories = [
+  'Todos los Productos',
   'Celulares',
   'Tablets',
   'Accesorios Móviles',
@@ -2033,7 +2298,13 @@ form.search-container {
   gap: 10px;
   cursor: pointer;
   color: white;
-  border: none; 
+  border: none;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.user-button:hover, .cart-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .profile-name, .cart-text {

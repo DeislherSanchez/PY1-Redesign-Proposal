@@ -92,13 +92,15 @@
   footer {
     background-color: #198b52; 
     color: #ffffff;
-    padding: 40px 20px;
+    padding: 40px 0;
     font-family: 'Open Sans', sans-serif;
+    width: 100%;
   }
 
   .footer-container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px;
   }
 
   .footer-main {
@@ -195,15 +197,48 @@
   
 
   @media (max-width: 768px) {
+    footer {
+      padding: 30px 15px;
+    }
+    
     .footer-main, .footer-bottom {
       flex-direction: column;
       text-align: left;
     }
+    
+    .footer-column {
+      width: 100%;
+      min-width: 100%;
+    }
+    
+    .footer-column h4 {
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+    
+    .footer-column a, .footer-column p {
+      font-size: 13px;
+    }
+    
     .footer-copyright p {
       text-align: left;
+      font-size: 11px;
+      line-height: 1.4;
     }
+    
     .payment-methods, .certifications {
-        align-items: flex-start; 
+      align-items: flex-start;
     }
+    
+    .logo-row {
+      gap: 15px;
+    }
+    
+    .logo-visa-pay { height: 35px; }
+    .logo-mastercard-pay { height: 25px; }
+    .logo-visa-cert { height: 35px; }
+    .logo-mastercard-cert { height: 35px; }
+    .logo-pci { height: 40px; }
+    .logo-ssl { height: 40px; }
   }
 </style>

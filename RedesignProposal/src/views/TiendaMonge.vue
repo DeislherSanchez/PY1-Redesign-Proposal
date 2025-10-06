@@ -1,15 +1,16 @@
 <script setup>
-import HeaderNavigation from '@/components/header.vue';
+import Header from '@/components/header.vue';
 import Footer from '@/components/footer.vue';
 import Benefits from '@/components/benefits.vue';
+import Catalog from '@/components/catalog.vue';
 </script>
 
 <template>
   <div class="page-container">
-    <HeaderNavigation/>
+    <Header/>
     
     <main class="content-wrapper">
-
+      <Catalog/>
     </main>
     <Benefits/>
     <Footer/>
