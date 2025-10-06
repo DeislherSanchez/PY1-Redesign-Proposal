@@ -83,7 +83,7 @@
             <a 
               href="#" 
               class="mobile-category-item"
-              @click.prevent="category === 'Todos los Productos' ? navigateToCatalog('', null) : (category !== 'Celulares' && category !== 'Tablets' && category !== 'Accesorios Móviles' && category !== 'Computadoras' && category !== 'Accesorios para Computadoras' && category !== 'TV y Video' && category !== 'Audio' && category !== 'Electrodomésticos' && category !== 'Hogar y Línea Blanca' && category !== 'Muebles' && category !== 'Camas y Colchones' && category !== 'Gamer Lab' && category !== 'Smart Home' && category !== 'Deportes' && category !== 'Automotriz' && category !== 'Motos' && category !== 'Herramientas' && category !== 'Belleza' && category !== 'Bebés' ? navigateToCatalog(category, null) : selectCategory(category))"
+              @click.prevent="category === 'Todos los Productos' ? navigateToCatalog('', null) : (category !== 'Celulares' && category !== 'Tablets' && category !== 'Accesorios Móviles' && category !== 'Computadoras' && category !== 'Accesorios para Computadoras' && category !== 'TV y Video' && category !== 'Audio' && category !== 'Electrodomésticos' && category !== 'Hogar y Línea Blanca' && category !== 'Muebles' && category !== 'Camas y Colchones' && category !== 'Gamer Lab' && category !== 'Smart Home' && category !== 'Deportes' && category !== 'Automotriz' && category !== 'Motos' && category !== 'Herramientas' && category !== 'Belleza' && category !== 'Bebés' ? navigateToCatalog(category, null) : selectCategory(category, $event))"
               :class="{ 
                 'has-subcategory': category !== 'Todos los Productos' && (category === 'Celulares' || category === 'Tablets' || category === 'Accesorios Móviles' || category === 'Computadoras' || category === 'Accesorios para Computadoras' || category === 'TV y Video' || category === 'Audio' || category === 'Electrodomésticos' || category === 'Hogar y Línea Blanca' || category === 'Muebles' || category === 'Camas y Colchones' || category === 'Gamer Lab' || category === 'Smart Home' || category === 'Deportes' || category === 'Automotriz' || category === 'Motos' || category === 'Herramientas' || category === 'Belleza' || category === 'Bebés'),
                 'active': activeSubcategory === category
@@ -720,9 +720,10 @@
               <a 
                 href="#" 
                 class="category-item"
-                @click.prevent="category === 'Todos los Productos' ? navigateToCatalog('', null) : (category !== 'Celulares' && category !== 'Tablets' && category !== 'Accesorios Móviles' && category !== 'Computadoras' && category !== 'Accesorios para Computadoras' && category !== 'TV y Video' && category !== 'Audio' && category !== 'Electrodomésticos' && category !== 'Hogar y Línea Blanca' && category !== 'Muebles' && category !== 'Camas y Colchones' && category !== 'Gamer Lab' && category !== 'Smart Home' && category !== 'Deportes' && category !== 'Automotriz' && category !== 'Motos' && category !== 'Herramientas' && category !== 'Belleza' && category !== 'Bebés' ? navigateToCatalog(category, null) : selectCategory(category))"
+                @click.prevent="category === 'Todos los Productos' ? navigateToCatalog('', null) : (!hasSubmenu(category) ? navigateToCatalog(category, null) : selectCategory(category, $event))"
+                @mouseenter="showSubmenuOnHover(category)"
                 :class="{ 
-                  'has-subcategory': category !== 'Todos los Productos' && (category === 'Celulares' || category === 'Tablets' || category === 'Accesorios Móviles' || category === 'Computadoras' || category === 'Accesorios para Computadoras' || category === 'TV y Video' || category === 'Audio' || category === 'Electrodomésticos' || category === 'Hogar y Línea Blanca' || category === 'Muebles' || category === 'Camas y Colchones' || category === 'Gamer Lab' || category === 'Smart Home' || category === 'Deportes' || category === 'Automotriz' || category === 'Motos' || category === 'Herramientas' || category === 'Belleza' || category === 'Bebés'),
+                  'has-subcategory': category !== 'Todos los Productos' && hasSubmenu(category),
                   'active': activeSubcategory === category
                 }"
               >
@@ -1427,16 +1428,27 @@ const toggleMenu = (menuName) => {
   }
 }
 
-const selectCategory = (category) => {
-  const categoriesWithSubmenu = ['Celulares', 'Tablets', 'Accesorios Móviles', 'Computadoras', 'Accesorios para Computadoras', 'TV y Video', 'Audio', 'Electrodomésticos', 'Hogar y Línea Blanca', 'Muebles', 'Camas y Colchones', 'Gamer Lab', 'Smart Home', 'Deportes', 'Automotriz', 'Motos', 'Herramientas', 'Belleza', 'Bebés', 'Marcas', 'Promociones', 'Tarjetas', 'Blog'];
+const categoriesWithSubmenu = ['Celulares', 'Tablets', 'Accesorios Móviles', 'Computadoras', 'Accesorios para Computadoras', 'TV y Video', 'Audio', 'Electrodomésticos', 'Hogar y Línea Blanca', 'Muebles', 'Camas y Colchones', 'Gamer Lab', 'Smart Home', 'Deportes', 'Automotriz', 'Motos', 'Herramientas', 'Belleza', 'Bebés', 'Marcas', 'Promociones', 'Tarjetas', 'Blog'];
 
+const hasSubmenu = (category) => {
+  return categoriesWithSubmenu.includes(category);
+}
+
+const selectCategory = (category, event) => {
   // Si es "Todos los Productos", navegar directamente al catálogo sin filtros
   if (category === 'Todos los Productos') {
     navigateToCatalog('', null);
     return;
   }
 
-  if (categoriesWithSubmenu.includes(category)) {
+  // En categorías con submenú, alternar la visualización de subcategorías
+  if (hasSubmenu(category)) {
+    // Prevenir comportamiento por defecto si se pasó el evento
+    if (event) {
+      event.stopPropagation();
+    }
+    
+    // Toggle: si ya está activa, cerrarla; si no, abrirla
     if (activeSubcategory.value === category) {
       activeSubcategory.value = null; 
     } else {
@@ -1444,6 +1456,12 @@ const selectCategory = (category) => {
     }
   } else {
     activeSubcategory.value = null;
+  }
+}
+
+const showSubmenuOnHover = (category) => {
+  if (hasSubmenu(category)) {
+    activeSubcategory.value = category;
   }
 }
 
@@ -2375,6 +2393,7 @@ form.search-container {
   margin-left: auto;
   opacity: 0.8;
   transition: opacity 0.2s ease;
+  pointer-events: none;
 }
 
 .menu-item:hover .menu-arrow,
@@ -2411,6 +2430,10 @@ form.search-container {
 
 .mobile-category-item.has-subcategory {
   font-weight: 600;
+}
+
+.mobile-category-item svg {
+  pointer-events: none;
 }
 
 .submenu {
@@ -2476,6 +2499,7 @@ form.search-container {
 .subcategory-arrow {
   opacity: 0.6;
   transition: opacity 0.2s ease;
+  pointer-events: none;
 }
 
 .category-item:hover .subcategory-arrow, .category-item.active .subcategory-arrow {
