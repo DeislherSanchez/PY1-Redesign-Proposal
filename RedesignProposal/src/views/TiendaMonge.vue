@@ -3,6 +3,7 @@ import Header from '@/components/header.vue';
 import Footer from '@/components/footer.vue';
 import Benefits from '@/components/benefits.vue';
 import Catalog from '@/components/catalog.vue';
+import Categories from '@/components/categories.vue';
 </script>
 
 <template>
@@ -10,6 +11,7 @@ import Catalog from '@/components/catalog.vue';
     <Header/>
     
     <main class="content-wrapper">
+      <Categories/>
       <Catalog/>
     </main>
     <Benefits/>
@@ -43,7 +45,7 @@ import Catalog from '@/components/catalog.vue';
 .content-wrapper {
   flex: 1; 
   margin-top: 155px; 
-  padding: 20px;
+  padding: 0;
   box-sizing: border-box; 
 }
 
